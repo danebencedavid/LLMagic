@@ -2,8 +2,8 @@
 _This repository will contain small, but interesting (hopefully) projects revolving around LLMs._
 
 ## 📋 Already planned projects:
-- [ ] Testing different model's responses' semantic stability given slightly different promts[^1].
-- [ ] Testing diffenent model's response when encountering traps set up in the promts[^1].
+- [ ] Testing different model's responses' semantic stability given slightly different prompts[^1].
+- [ ] Testing diffenent model's response when encountering traps set up in the prompts[^1].
 ## 📈 Status:
 | Project Name  | Status | Docs|
 | ------------- | ------------- | ------------- |
