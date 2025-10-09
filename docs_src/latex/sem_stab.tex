@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{booktabs}  
+\usepackage{siunitx}   
+\usepackage[table]{xcolor}
+\usepackage{array}
+
+
+
+\title{Semantic Stability}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+This projects aims at testing and visualizing the responses, and more importantly the differences between responses to slightly different, but similar prompts.
+
+\section{Theory}
+A simple base prompt $p$, and a set of variant $p^*$ prompts are chosen. Using the \textit{all-MiniLM-L6-v2} model, their embedding vectors are created. Only those variant $p^*$ prompts are selected, which surpass the \textbf{0.85} similarity (calculated using \textit{cosine similarity}).
+
+\paragraph{Base prompt.}
+\texttt{Why do humans need sleep?}
+
+\paragraph{Prompt variants.}
+\begin{itemize}
+    \item What makes sleep essential for humans?
+    \item How does sleep benefit the human body and mind?
+    \item What role does sleep play in human health and functioning?
+    \item Why is it necessary for people to sleep?
+    \item In what ways is sleep crucial to human well-being?
+    \item What are the reasons humans can't function without sleep?
+    \item Why is getting enough sleep important for humans?
+    \item What happens to the human body and brain that makes sleep a necessity?
+\end{itemize}
+
+\paragraph{Filtering prompt variants.}
+To control prompt diversity, we compute the semantic similarity between each variant and its base prompt.
+The procedure is as follows:
+
+\begin{enumerate}
+    \item Encode the base prompt $p$ and all variants $p^*_i$ using a SentenceTransformer model.
+    \item Compute cosine similarities $s_i = \text{cos\_sim}(p, p^*_i)$ for each variant.
+    \item Construct a data frame containing each variant, its similarity score, and a Boolean flag
+    indicating whether it meets a minimum threshold (e.g.\ $s_i \ge 0.85$).
+    \item Sort the data frame in descending order by similarity.
+\end{enumerate}
+
+\begin{table}[ht]
+    \centering
+    \caption{Variant prompts with their similarity scores and if they remain in the experiment.}
+    \label{tab:sleep_variants}
+    \rowcolors{2}{gray!10}{white} % Alternating row colors
+    \begin{tabular}{c >{\raggedright\arraybackslash}p{8cm} S[table-format=1.6] c}
+        \toprule
+        ID & Variant & {Similarity} & Keep \\
+        \midrule
+        3 & Why is it necessary for people to sleep? & 0.918821 & True \\
+        6 & Why is getting enough sleep important for humans? & 0.882275 & True \\
+        0 & What makes sleep essential for humans? & 0.850024 & True \\
+        7 & What happens to the human body and brain that makes sleep a necessity? & 0.825465 & False \\
+        5 & What are the reasons humans can't function without sleep? & 0.817788 & False \\
+        4 & In what ways is sleep crucial to human well-being? & 0.753535 & False \\
+        1 & How does sleep benefit the human body and mind? & 0.747996 & False \\
+        2 & What role does sleep play in human health and functioning? & 0.693460 & False \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+
+\end{document}
