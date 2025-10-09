@@ -8,7 +8,7 @@ _This repository will contain small, but interesting (hopefully) projects revolv
 ## 📈 Status:
 | Project Name  | Status | Docs|
 | ------------- | ------------- | ------------- |
-| Semantic Stability  | Under Development  |[Read it!](docs/pdf/sem_stab.pdf)  |
+| Semantic Stability  | Under Development  |[Read it!](docs/pdfs/sem_stab.pdf)  |
 | N/A  | N/A  |[N/A](N/A) |
 
 [^1]: More information can be found in each project's folder and in their documentation.
