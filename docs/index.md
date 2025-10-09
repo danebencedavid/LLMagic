@@ -14,5 +14,5 @@ Each mini-project aims to reveal *how* models think, respond, and drift — thro
 - [Semantic Stability](pdfs/sem_stab.pdf)
 
 ## 🧪 Mini-projects
-- [Semantic Stability](projects/semantic_stability)
+- [Semantic Stability](https://github.com/danebencedavid/LLMagic/tree/main/projects/semantic_stability)
 
