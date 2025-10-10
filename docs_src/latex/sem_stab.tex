@@ -6,6 +6,7 @@
 \usepackage{siunitx}   
 \usepackage[table]{xcolor}
 \usepackage{array}
+\usepackage{float}
 
 
 
@@ -71,4 +72,15 @@ The procedure is as follows:
 
 
 
+To determine the base response, the base prompt is sent 10 times to our chosen LLM (\textit{gpt-5-mini}), and KMeans is applied to the responses' embeddings.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{base_response_embs_cluster.png}
+    \caption{Base Responses' Embeddings Cluster}
+    \label{fig:placeholder}
+\end{figure}
+
+To choose a cluster, we calculate the cosine similarity between the cluster members and choose the cluster with the most internal similarity, which in this case is \textit{Cluster 0} with a \textbf{0.936} similarity.
+The cluster's centroid is calculated, and from now on it acts as the \textit{base response embedding.}
 \end{document}
