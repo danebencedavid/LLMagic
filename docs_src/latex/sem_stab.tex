@@ -72,7 +72,7 @@ The procedure is as follows:
 
 
 
-To determine the base response, the base prompt is sent 10 times to our chosen LLM (\textit{gpt-5-mini}), and KMeans is applied to the responses' embeddings.
+To determine the base response, the base prompt is sent 10 times to our chosen LLM (\textit{gpt-5-mini}) - from now on referred to as \textit{model} -, and KMeans is applied to the responses' embeddings.
 
 \begin{figure}[H]
     \centering
@@ -83,4 +83,96 @@ To determine the base response, the base prompt is sent 10 times to our chosen L
 
 To choose a cluster, we calculate the cosine similarity between the cluster members and choose the cluster with the most internal similarity, which in this case is \textit{Cluster 0} with a \textbf{0.936} similarity.
 The cluster's centroid is calculated, and from now on it acts as the \textit{base response embedding.}
+
+The following 3 variant prompts were kept and tried in the project.
+
+\begin{table}[ht]
+    \centering
+    \caption{Selected variant prompts with their similarity scores.}
+    \label{tab:sleep_variants}
+    \rowcolors{2}{gray!10}{white} % Alternating row colors
+    \begin{tabular}{c >{\raggedright\arraybackslash}p{8cm} S[table-format=1.6] c}
+        \toprule
+        ID & Variant & {Similarity}\\
+        \midrule
+        3 & Why is it necessary for people to sleep? & 0.918821  \\
+        6 & Why is getting enough sleep important for humans? & 0.882275  \\
+        0 & What makes sleep essential for humans? & 0.850024  \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Every variant prompt is sent 10 times to the \textit{model} and the embedding vector, token number and similarity compared to the \textit{base response embedding} is saved.
+
+\begin{table}[ht]
+    \centering
+    \caption{Responses for \textit{Why is it necessary for people to sleep?}.}
+    \label{tab:sleep_variants}
+    \rowcolors{2}{gray!10}{white} % Alternating row colors
+    \begin{tabular}{c >{\raggedright\arraybackslash}p{8cm} S[table-format=1.6] c}
+        \toprule
+        Response Index & Text & Similarity & Token Count\\
+        \midrule
+        1 & Sleep is not optional for good health — it’s a... & 0.917627 & 427\\
+        2 & Sleep is essential because it performs many cr... & 0.946412 & 550\\
+        3 & Sleep is essential because it supports many cr... & 0.894599 & 331\\
+        4 & Sleep is essential because it lets your body a... & 0.945880 & 590\\
+        5 & Sleep is not optional for the brain and body—i... & 0.923881 & 597\\
+        6 & Sleep is not optional for the body and brain —... & 0.899376 & 616\\
+        7 & Sleep is essential because it supports many cr... & 0.934993 & 516\\
+        8 & Sleep is essential because it supports many bi... & 0.918472 & 371\\
+        9 & Short answer: sleep is essential because it le... & 0.946763 & 570\\
+        10 & Sleep is essential because it lets your brain ... & 0.925013 & 397\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Responses for \textit{Why is getting enough sleep important for humans?}.}
+    \label{tab:getting_enough_sleep}
+    \rowcolors{2}{gray!10}{white} % Alternating row colors
+    \begin{tabular}{c >{\raggedright\arraybackslash}p{8cm} S[table-format=1.6] c}
+        \toprule
+        Response Index & Text & Similarity & Token Count\\
+        \midrule
+        1 & Sleep is essential for nearly every aspect of ... & 0.850531 & 364\\
+        2 & Sleep is essential because it supports nearly ... & 0.831646 & 494\\
+        3 & Sleep isn’t just “rest”—it’s an active, essent... & 0.798350 & 413\\
+        4 & Sleep is a fundamental biological need. Gettin... & 0.815536 & 504\\
+        5 & Getting enough sleep is essential because it a... & 0.793406 & 536\\
+        6 & Sleep is essential for almost every system in ... & 0.791501 & 403\\
+        7 & Sleep is essential because it supports nearly ... & 0.861821 & 470\\
+        8 & Sleep is essential for nearly every part of yo... & 0.843667 & 380\\
+        9 & Getting enough sleep is essential because slee... & 0.839533 & 432\\
+        10 & Sleep is essential because it supports nearly ... & 0.838996 & 397\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \caption{Responses for \textit{What makes sleep essential for humans?}.}
+    \label{tab:what_makes_sleep_essential}
+    \rowcolors{2}{gray!10}{white} % Alternating row colors
+    \begin{tabular}{c >{\raggedright\arraybackslash}p{8cm} S[table-format=1.6] c}
+        \toprule
+        Response Index & Text & Similarity & Token Count\\
+        \midrule
+        1 & Sleep is essential because it’s when many crit... & 0.898335 & 598\\
+        2 & Sleep is essential because it’s when the body ... & 0.916517 & 652\\
+        3 & Sleep is essential because it is when the brai... & 0.912007 & 490\\
+        4 & Sleep is essential because it performs multipl... & 0.885284 & 557\\
+        5 & Sleep is essential because it supports multipl... & 0.920379 & 555\\
+        6 & Sleep is not just passive rest — it is an acti... & 0.920757 & 526\\
+        7 & Sleep is essential because it supports multipl... & 0.913000 & 566\\
+        8 & Sleep is essential because it’s when many acti... & 0.915230 & 664\\
+        9 & Short answer: Sleep is essential because it su... & 0.945184 & 611\\
+        10 & Sleep is not just “time off” — it’s an active,... & 0.911126 & 566\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+
 \end{document}
