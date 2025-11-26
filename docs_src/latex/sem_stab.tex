@@ -49,7 +49,7 @@ The procedure is as follows:
     \item Sort the data frame in descending order by similarity.
 \end{enumerate}
 
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \caption{Variant prompts with their similarity scores and if they remain in the experiment.}
     \label{tab:sleep_variants}
@@ -86,7 +86,7 @@ The cluster's centroid is calculated, and from now on it acts as the \textit{bas
 
 The following 3 variant prompts were kept and tried in the project.
 
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \caption{Selected variant prompts with their similarity scores.}
     \label{tab:sleep_variants}
@@ -104,7 +104,7 @@ The following 3 variant prompts were kept and tried in the project.
 
 Every variant prompt is sent 10 times to the \textit{model} and the embedding vector, token number and similarity compared to the \textit{base response embedding} is saved.
 
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \caption{Responses for \textit{Why is it necessary for people to sleep?}.}
     \label{tab:sleep_variants}
@@ -127,7 +127,7 @@ Every variant prompt is sent 10 times to the \textit{model} and the embedding ve
     \end{tabular}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \caption{Responses for \textit{Why is getting enough sleep important for humans?}.}
     \label{tab:getting_enough_sleep}
@@ -150,7 +150,7 @@ Every variant prompt is sent 10 times to the \textit{model} and the embedding ve
     \end{tabular}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \caption{Responses for \textit{What makes sleep essential for humans?}.}
     \label{tab:what_makes_sleep_essential}
@@ -173,6 +173,31 @@ Every variant prompt is sent 10 times to the \textit{model} and the embedding ve
     \end{tabular}
 \end{table}
 
+\paragraph{Variant Prompt Response Map.} To better understand how small prompt differences influence the semantic content, a two-dimensional visualization was created (Figure~\ref{fig:response_map}). Each point in the plot corresponds to a single response generated from one of the three selected variant prompts. The horizontal axis represents the token count of the response, while the vertical axis shows its cosine similarity to the base response centroid. A small amount of jitter is applied to the token count to avoid marker overlap.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{responsemap.png}
+    \caption{Variant Prompt Response Map showing token length vs.\ semantic similarity for three selected prompt variants.}
+    \label{fig:response_map}
+\end{figure}
+
+
+The visualization incorporates two types of information: (1)~\textbf{prompt-level similarity}, represented by dashed horizontal lines, and 
+(2)~\textbf{response-level behaviour}, represented by the scattered points. 
+Each dashed line marks the semantic distance between a variant prompt and the original base prompt, making it possible to visually compare how far each prompt deviates in meaning before any responses are generated. Prompts with higher similarity scores (lines positioned near the top of the plot) are semantically closest to the base prompt.
+
+For each prompt, the model was queried ten times, and the embedding vectors of these responses were compared to the base response centroid. This results in point clusters around the dashed lines, indicating how close the answers remain to the expected semantic region.
+
+Two notable patterns emerge from the plot:
+\begin{enumerate}
+    \item \textbf{Prompt similarity strongly predicts response similarity.}  
+    The prompt with the highest semantic similarity (\textit{``Why is it necessary for people to sleep?''}) produces responses tightly clustered near the upper region of the plot. In contrast, the prompt with the lowest similarity among the selected group (\textit{``What makes sleep essential for humans?''}) shows responses shifted downward, indicating greater semantic drift.  
+    This confirms that even small changes in phrasing can systematically nudge the model toward different areas of its semantic space.
+
+    \item \textbf{Token count varies substantially but does not alone explain semantic drift.}  
+    Although the model produces responses with token counts ranging roughly from 330 to 650 tokens, the semantic similarity appears only weakly correlated with response length. Short and long responses both occur across the similarity range, implying that verbosity alone is not a strong predictor of semantic stability.  
+    However, for some prompts, a mild trend can be observed: longer responses may drift slightly further away from the centroid, possibly due to the model adding additional explanatory content.
+\end{enumerate}
 
 \end{document}
